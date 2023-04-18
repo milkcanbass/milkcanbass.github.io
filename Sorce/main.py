@@ -64,6 +64,31 @@ from bs4 import BeautifulStoneSoup as Soup
 with open(PATH_TO_BLOG/"index.html") as index:
     soup=Soup(index.read())
     str(soup)
+    
+    def check_for_duplication_links(path_to_new_content, links):
+        urls = [str(link.get("href")) for link in links] #[1.html, 2.html ...]
+        content_path = str(Path(*path_to_new_content.parts[-2:]))
+        return content_path in urls
+
+    def write_to_index(path_to_new_content):
+        with open(PATH_TO_BLOG/'index.html') as index:
+            soup = Soup(index.read())
+
+            links = soup.find_all('a')
+            last_link = links[-1]
+
+            if check_for_duplication_links(path_to_new_content,links):
+                raise ValueError("Link already exists")
+
+                link_to_new_blog = soup, new_tag("a",href= Path(*path_to_new_content.parts[-2:]))
+                link_to_new_blog.string = path_to_new_content.name.split('.')[0]
+                last_link.insert_after(link_to_new_blog)
+
+                with open(PATH_TO_BLOG/'index.html','w') as f:
+                    f.write(str(soup.prettify(formatter='html')))
+
+
+
 
 # Test GPT-3 completion
 # prompt = "Once upon a time"
