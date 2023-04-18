@@ -32,7 +32,7 @@ def create_new_blog(title,content,cover_image):
     cover_image = Path(cover_image)
 
     files = len(list(PATH_TO_CONTENT.glob(".html")))
-    new_title = f"{files+1}".html
+    new_title = f"{files+1}.html"
     path_to_new_content = PATH_TO_CONTENT/new_title
 
     shutil.copy(cover_image,PATH_TO_CONTENT)
