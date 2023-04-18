@@ -58,7 +58,7 @@ def create_new_blog(title,content,cover_image):
     else:
         raise FileExistsError("File already exists, check again your name")
    
-path_to_new_content = create_new_blog('test_title','chikuwa','logo.png')
+path_to_new_content = create_new_blog('test_title','chikuwa',null)
 
 # Test GPT-3 completion
 # prompt = "Once upon a time"
