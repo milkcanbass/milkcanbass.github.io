@@ -60,6 +60,11 @@ def create_new_blog(title,content,cover_image):
    
 path_to_new_content = create_new_blog('test_title','chikuwa',null)
 
+from bs4 import BeautifulStoneSoup as Soup
+with open(PATH_TO_BLOG/"index.html") as index:
+    soup=Soup(index.read())
+    str(soup)
+
 # Test GPT-3 completion
 # prompt = "Once upon a time"
 # model = "text-davinci-002"
